@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stampy Access</title>
+  <link rel="stylesheet" href="gate.css" />
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Private access</div>
+    <h1>Enter password</h1>
+    <input id="passwordInput" type="password" placeholder="Password" />
+    <button id="enterButton">Enter</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const CORRECT_PASSWORD = 'LamineYamal';
+    const TARGET_PAGE = 'index.html';
+
+    const passwordInput = document.getElementById('passwordInput');
+    const enterButton = document.getElementById('enterButton');
+    const message = document.getElementById('message');
+
+    function attemptLogin() {
+      const value = passwordInput.value;
+      if (value === CORRECT_PASSWORD) {
+        message.style.color = '#176b34';
+        message.textContent = 'Access granted. Opening portfolio...';
+        setTimeout(() => {
+          window.location.href = TARGET_PAGE;
+        }, 400);
+      } else {
+        message.style.color = '#b42318';
+        message.textContent = 'Wrong password. Try again.';
+      }
+    }
+
+    enterButton.addEventListener('click', attemptLogin);
+    passwordInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') attemptLogin();
+    });
+  </script>
+</body>
+</html>
